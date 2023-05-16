@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:product_scanner/screen/detail_prodcut_screen.dart';
 import 'package:product_scanner/screen/error_screen.dart';
 import 'package:product_scanner/screen/home_screen.dart';
 import 'package:product_scanner/screen/product_screen.dart';
@@ -14,9 +15,13 @@ final router = GoRouter(
         builder: (context, state) => const HomeScreen(),
         routes: [
           GoRoute(
-            path: 'product',
-            builder: (context, state) => const ProductScreen(),
-          )
+              path: 'product',
+              builder: (context, state) => const ProductScreen(),
+              routes: [
+                GoRoute(
+                    path: 'detailProduct',
+                    builder: (context, state) => const DetailProductScreen()),
+              ]),
         ]),
     GoRoute(
         path: '/setings', builder: (context, state) => const SettingScreen()),

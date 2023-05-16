@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:product_scanner/routes/router.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});
@@ -9,7 +10,22 @@ class ProductScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('All Product'),
       ),
-      body: const Text('All Product'),
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return ListTile(
+            onTap: () {
+              context.go('/product/detailProduct');
+            },
+            leading: CircleAvatar(
+              child: Text('${index + 1}'),
+            ),
+            title: Text(
+              'Product ${index + 1}',
+            ),
+          );
+        },
+      ),
     );
   }
 }
