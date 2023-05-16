@@ -1,4 +1,4 @@
-part of 'routes.dart';
+part of 'router.dart';
 
 abstract class Routes {
   static const home = 'home';

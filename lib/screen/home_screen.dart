@@ -16,12 +16,12 @@ class HomeScreen extends StatelessWidget {
           children: [
             ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).go('/setings');
+                  context.goNamed(Routes.setting);
                 },
                 child: Text('Go To Setting')),
             ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).go('/product');
+                  context.goNamed(Routes.product);
                 },
                 child: Text('Go To Product')),
           ],

@@ -12,7 +12,7 @@ class SettingScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-            onPressed: () => GoRouter.of(context).go('/'),
+            onPressed: () => context.goNamed(Routes.home),
             child: Text('Back to Homepage')),
       ),
     );
