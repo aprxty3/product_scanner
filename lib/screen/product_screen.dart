@@ -17,7 +17,7 @@ class ProductScreen extends StatelessWidget {
             onTap: () {
               // context.go('/product/${index + 1}');
               context.goNamed(
-                'detailProduct',
+                Routes.detailProduct,
                 pathParameters: {'id': '${index + 1}'},
                 queryParameters: {
                   'id': '${index + 1}',
