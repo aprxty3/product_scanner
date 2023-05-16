@@ -15,7 +15,16 @@ class ProductScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              context.go('/product/detailProduct');
+              // context.go('/product/${index + 1}');
+              context.goNamed(
+                'detailProduct',
+                pathParameters: {'id': '${index + 1}'},
+                queryParameters: {
+                  'id': '${index + 1}',
+                  'name': 'product ${index + 1}',
+                  'desc': 'ini adalah product ${index + 1}',
+                },
+              );
             },
             leading: CircleAvatar(
               child: Text('${index + 1}'),

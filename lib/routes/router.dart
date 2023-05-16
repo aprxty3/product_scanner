@@ -12,18 +12,26 @@ final router = GoRouter(
   routes: [
     GoRoute(
         path: '/',
+        name: 'home',
         builder: (context, state) => const HomeScreen(),
         routes: [
           GoRoute(
               path: 'product',
+              name: 'product',
               builder: (context, state) => const ProductScreen(),
               routes: [
                 GoRoute(
-                    path: 'detailProduct',
-                    builder: (context, state) => const DetailProductScreen()),
+                    path: ':id',
+                    name: 'detailProduct',
+                    builder: (context, state) => DetailProductScreen(
+                          state.pathParameters['id'].toString(),
+                          state.queryParameters,
+                        )),
               ]),
         ]),
     GoRoute(
-        path: '/setings', builder: (context, state) => const SettingScreen()),
+        path: '/setings',
+        name: 'setting',
+        builder: (context, state) => const SettingScreen()),
   ],
 );
