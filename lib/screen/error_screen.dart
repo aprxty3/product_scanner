@@ -7,9 +7,9 @@ class ErrorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: const Text('Error Screen'),
       ),
-      body: const Text('Home Screen'),
+      body: const Text('Error Screen'),
     );
   }
 }
