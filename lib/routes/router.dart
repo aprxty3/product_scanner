@@ -1,13 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:product_scanner/screen/detail_prodcut_screen.dart';
 import 'package:product_scanner/screen/error_screen.dart';
 import 'package:product_scanner/screen/home_screen.dart';
+import 'package:product_scanner/screen/login_screen.dart';
 import 'package:product_scanner/screen/product_screen.dart';
 import 'package:product_scanner/screen/setting_screen.dart';
 export 'package:go_router/go_router.dart';
 part 'routes_name.dart';
 
 final router = GoRouter(
+  redirect: (context, state) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    if (auth.currentUser == null) {
+      return '/login';
+    } else {
+      return null;
+    }
+  },
   errorBuilder: (context, state) => const ErrorScreen(),
   routes: [
     GoRoute(
@@ -33,5 +43,9 @@ final router = GoRouter(
         path: '/setings',
         name: Routes.setting,
         builder: (context, state) => const SettingScreen()),
+    GoRoute(
+        path: '/login',
+        name: Routes.login,
+        builder: (context, state) => LoginScreen()),
   ],
 );
