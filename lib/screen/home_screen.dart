@@ -13,34 +13,42 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Home Screen'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  context.goNamed(Routes.setting);
-                },
-                child: const Text('Go To Setting')),
-            ElevatedButton(
-                onPressed: () {
-                  context.goNamed(Routes.product);
-                },
-                child: const Text('Go To Product')),
-          ],
+        child: BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is AuthStateLogout) {
+              context.goNamed(Routes.login);
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthStateLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is AuthStateError) {
+              return const Center(child: Text('Error Bro'));
+            }
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      context.goNamed(Routes.setting);
+                    },
+                    child: const Text('Go To Setting')),
+                ElevatedButton(
+                    onPressed: () {
+                      context.goNamed(Routes.product);
+                    },
+                    child: const Text('Go To Product')),
+              ],
+            );
+          },
         ),
       ),
-      floatingActionButton: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthStateLogout) {
-            context.goNamed(Routes.login);
-          }
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.read<AuthBloc>().add(AuthEventLogout());
         },
-        child: FloatingActionButton(
-          onPressed: () {
-            context.read<AuthBloc>().add(AuthEventLogout());
-          },
-          child: const Icon(Icons.logout),
-        ),
+        child: const Icon(Icons.logout),
       ),
     );
   }

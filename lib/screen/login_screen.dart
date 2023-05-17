@@ -55,6 +55,12 @@ class LoginScreen extends StatelessWidget {
                   if (state is AuthStateLogin) {
                     context.goNamed(Routes.home);
                   }
+                  if (state is AuthStateError) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(state.message),
+                      duration: const Duration(seconds: 2),
+                    ));
+                  }
                 },
                 builder: (context, state) {
                   if (state is AuthStateLoading) {

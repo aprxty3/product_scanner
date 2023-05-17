@@ -14,9 +14,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: event.email!, password: event.password!);
         emit(AuthStateLogin());
       } on FirebaseAuthException catch (e) {
-        emit(AuthStateError());
+        emit(AuthStateError(message: e.message!));
       } catch (e) {
-        emit(AuthStateError());
+        emit(AuthStateError(message: e.toString()));
       }
     });
     on<AuthEventLogout>((event, emit) async {
@@ -25,9 +25,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await auth.signOut();
         emit(AuthStateLogout());
       } on FirebaseAuthException catch (e) {
-        emit(AuthStateError());
+        emit(AuthStateError(message: e.message!));
       } catch (e) {
-        emit(AuthStateError());
+        emit(AuthStateError(message: e.toString()));
       }
     });
   }
