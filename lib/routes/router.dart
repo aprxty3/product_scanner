@@ -12,6 +12,7 @@ part 'routes_name.dart';
 final router = GoRouter(
   redirect: (context, state) {
     FirebaseAuth auth = FirebaseAuth.instance;
+    print(auth.currentUser);
     if (auth.currentUser == null) {
       return '/login';
     } else {

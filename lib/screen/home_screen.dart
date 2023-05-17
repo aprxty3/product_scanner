@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_scanner/bloc/auth/auth_bloc.dart';
 import 'package:product_scanner/routes/router.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,6 +27,19 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: const Text('Go To Product')),
           ],
+        ),
+      ),
+      floatingActionButton: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthStateLogout) {
+            context.goNamed(Routes.login);
+          }
+        },
+        child: FloatingActionButton(
+          onPressed: () {
+            context.read<AuthBloc>().add(AuthEventLogout());
+          },
+          child: const Icon(Icons.logout),
         ),
       ),
     );

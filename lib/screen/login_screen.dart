@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:product_scanner/bloc/auth/auth_bloc.dart';
 import 'package:product_scanner/routes/router.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
-  final emailController = TextEditingController(text: 'admin@gmail.com');
-  final passwordController = TextEditingController(text: 'admin');
+  final emailController = TextEditingController(text: 'ajicool26@gmail.com');
+  final passwordController = TextEditingController(text: 'admin12');
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,19 @@ class LoginScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15)),
-              child: const Text('Login'),
+              child: BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthStateLogin) {
+                    context.goNamed(Routes.home);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is AuthStateLoading) {
+                    return const Text('Loadingg.....');
+                  }
+                  return const Text('Login');
+                },
+              ),
             ),
           ],
         ),
