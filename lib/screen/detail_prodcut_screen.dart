@@ -14,7 +14,7 @@ class DetailProductScreen extends StatelessWidget {
       body: Center(
         child: Text(
           data.toString(),
-          style: TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24),
         ),
       ),
     );

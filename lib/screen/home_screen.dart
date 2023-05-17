@@ -18,12 +18,12 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   context.goNamed(Routes.setting);
                 },
-                child: Text('Go To Setting')),
+                child: const Text('Go To Setting')),
             ElevatedButton(
                 onPressed: () {
                   context.goNamed(Routes.product);
                 },
-                child: Text('Go To Product')),
+                child: const Text('Go To Product')),
           ],
         ),
       ),

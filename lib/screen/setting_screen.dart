@@ -13,7 +13,7 @@ class SettingScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () => context.goNamed(Routes.home),
-            child: Text('Back to Homepage')),
+            child: const Text('Back to Homepage')),
       ),
     );
   }
