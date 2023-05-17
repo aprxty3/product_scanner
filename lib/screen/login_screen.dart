@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_scanner/bloc/auth/auth_bloc.dart';
 import 'package:product_scanner/routes/router.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -41,7 +43,9 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                context.goNamed(Routes.home);
+                context.read<AuthBloc>().add(AuthEventLogin(
+                    email: emailController.text,
+                    password: passwordController.text));
               },
               style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15)),
