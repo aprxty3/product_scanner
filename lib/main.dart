@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<AuthBloc>(
       create: (context) => AuthBloc(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Material App',
         routerConfig: router,
       ),
