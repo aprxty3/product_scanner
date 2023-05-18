@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:product_scanner/bloc/bloc.dart';
 
 class AddProductScreen extends StatelessWidget {
   AddProductScreen({super.key});
@@ -53,7 +54,26 @@ class AddProductScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          ElevatedButton(onPressed: () {}, child: const Text('Tambah'))
+          ElevatedButton(
+              onPressed: () {
+                context.read<ProductBloc>().add(ProductEventAdd(
+                    code: codeController.text,
+                    name: nameController.text,
+                    qty: int.parse(quantityController.text)));
+              },
+              child: BlocConsumer<ProductBloc, ProductState>(
+                listener: (context, state) {
+                  if (state is ProductStateError) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(state.message),
+                    ));
+                  }
+                },
+                builder: (context, state) {
+                  return Text(
+                      state is ProductStateLoading ? 'loading' : 'Tambah');
+                },
+              ))
         ],
       ),
     );
