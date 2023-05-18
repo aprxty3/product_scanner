@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
             case 0:
               title = 'Add Product';
               icon = Icons.post_add_rounded;
-              onTap = () => context.goNamed(Routes.scan);
+              onTap = () => context.goNamed(Routes.addProduct);
               break;
             case 1:
               title = 'Product';

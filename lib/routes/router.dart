@@ -5,7 +5,7 @@ import 'package:product_scanner/screen/error_screen.dart';
 import 'package:product_scanner/screen/home_screen.dart';
 import 'package:product_scanner/screen/login_screen.dart';
 import 'package:product_scanner/screen/product_screen.dart';
-import 'package:product_scanner/screen/scan_screen.dart';
+import 'package:product_scanner/screen/add_product_screen.dart';
 export 'package:go_router/go_router.dart';
 part 'routes_name.dart';
 
@@ -40,9 +40,9 @@ final router = GoRouter(
                         )),
               ]),
           GoRoute(
-            path: 'scan',
-            name: Routes.scan,
-            builder: (context, state) => const ScanScreen(),
+            path: 'addProduct',
+            name: Routes.addProduct,
+            builder: (context, state) => AddProductScreen(),
           ),
         ]),
     GoRoute(
