@@ -12,4 +12,7 @@ class ProductEventAdd extends ProductEvent {
 
 class ProductEventEdit extends ProductEvent {}
 
-class ProductEventDelete extends ProductEvent {}
+class ProductEventDelete extends ProductEvent {
+  final String id;
+  ProductEventDelete(this.id);
+}

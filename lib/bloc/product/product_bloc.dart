@@ -41,6 +41,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       }
     });
     on<ProductEventEdit>((event, emit) {});
-    on<ProductEventDelete>((event, emit) {});
+    on<ProductEventDelete>((event, emit) async {
+      try {
+        emit(ProductStateLoading());
+        await firestore.collection('products').doc(event.id).delete();
+
+        emit(ProductStateComplete());
+      } on FirebaseException catch (e) {
+        emit(ProductStateError(
+            message: e.message ?? 'Tidak dapat menghapus product'));
+      } catch (e) {
+        emit(ProductStateError(message: e.toString()));
+      }
+    });
   }
 }

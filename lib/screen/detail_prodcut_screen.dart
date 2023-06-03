@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:product_scanner/bloc/bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../model/product_model.dart';
@@ -75,7 +76,21 @@ class DetailProductScreen extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {},
-            child: Text('Update Product'),
+            child: const Text('Update Product'),
+          ),
+          const SizedBox(height: 20),
+          TextButton(
+            onPressed: () {
+              context.read<ProductBloc>().add(
+                    ProductEventDelete(product.id!),
+                  );
+            },
+            child: const Text(
+              'Delete Product',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
           ),
         ],
       ),
