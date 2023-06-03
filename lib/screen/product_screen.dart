@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:product_scanner/bloc/bloc.dart';
 import 'package:product_scanner/model/product_model.dart';
-import 'package:product_scanner/routes/router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -37,6 +36,11 @@ class ProductScreen extends StatelessWidget {
           List<ProductModel> allProducts = [];
           for (var element in snapshot.data!.docs) {
             allProducts.add(element.data());
+          }
+          if (allProducts.isEmpty) {
+            return const Center(
+              child: Text('Tidak ada data'),
+            );
           }
           return ListView.builder(
             itemCount: allProducts.length,
