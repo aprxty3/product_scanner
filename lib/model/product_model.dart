@@ -2,26 +2,26 @@ class ProductModel {
   String? code;
   String? name;
   int? qty;
-  String? uid;
+  String? id;
 
   ProductModel({
     this.code,
     this.name,
     this.qty,
-    this.uid,
+    this.id,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         code: json["code"] ?? '',
         name: json["name"] ?? '',
         qty: json["qty"] ?? 0,
-        uid: json["uid"] ?? '',
+        id: json["id"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "name": name,
         "qty": qty,
-        "uid": uid,
+        "id": id,
       };
 }

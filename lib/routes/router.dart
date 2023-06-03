@@ -27,18 +27,20 @@ final router = GoRouter(
         builder: (context, state) => const HomeScreen(),
         routes: [
           GoRoute(
-              path: 'product',
-              name: Routes.product,
-              builder: (context, state) => const ProductScreen(),
-              routes: [
-                GoRoute(
-                    path: ':id',
-                    name: Routes.detailProduct,
-                    builder: (context, state) => DetailProductScreen(
-                          state.pathParameters['id'].toString(),
-                          state.queryParameters,
-                        )),
-              ]),
+            path: 'product',
+            name: Routes.product,
+            builder: (context, state) => const ProductScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                name: Routes.detailProduct,
+                builder: (context, state) => DetailProductScreen(
+                  state.pathParameters['id'].toString(),
+                  state.extra,
+                ),
+              ),
+            ],
+          ),
           GoRoute(
             path: 'addProduct',
             name: Routes.addProduct,

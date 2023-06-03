@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DetailProductScreen extends StatelessWidget {
   final String id;
-  final Map<String, dynamic> data;
+  final data;
   const DetailProductScreen(this.id, this.data, {super.key});
 
   @override
