@@ -56,10 +56,16 @@ class AddProductScreen extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
               onPressed: () {
-                context.read<ProductBloc>().add(ProductEventAdd(
-                    code: codeController.text,
-                    name: nameController.text,
-                    qty: int.parse(quantityController.text)));
+                if (codeController.text.length == 10) {
+                  context.read<ProductBloc>().add(ProductEventAdd(
+                      code: codeController.text,
+                      name: nameController.text,
+                      qty: int.parse(quantityController.text)));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Code harus 10 digit"),
+                  ));
+                }
               },
               child: BlocConsumer<ProductBloc, ProductState>(
                 listener: (context, state) {

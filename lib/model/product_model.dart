@@ -1,5 +1,5 @@
 class ProductModel {
-  int? code;
+  String? code;
   String? name;
   int? qty;
   String? uid;
