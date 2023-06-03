@@ -76,8 +76,36 @@ class DetailProductScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {},
-            child: const Text('Update Product'),
+            onPressed: () {
+              context.read<ProductBloc>().add(
+                    ProductEventEdit(
+                      id: product.id!,
+                      name: nameController.text,
+                      qty: int.parse(qtyController.text),
+                    ),
+                  );
+            },
+            child: BlocConsumer<ProductBloc, ProductState>(
+              listener: (context, state) {
+                if (state is ProductStateError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                    ),
+                  );
+                }
+                if (state is ProductStateCompleteEdit) {
+                  context.pop();
+                }
+              },
+              builder: (context, state) {
+                return Text(
+                  state is ProductStateLoading
+                      ? "Loadinggg..."
+                      : 'Update Product',
+                );
+              },
+            ),
           ),
           const SizedBox(height: 20),
           TextButton(
@@ -95,7 +123,7 @@ class DetailProductScreen extends StatelessWidget {
                     ),
                   );
                 }
-                if (state is ProductStateComplete) {
+                if (state is ProductStateCompleteDelete) {
                   context.pop();
                 }
               },

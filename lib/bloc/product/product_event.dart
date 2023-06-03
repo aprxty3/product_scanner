@@ -10,7 +10,13 @@ class ProductEventAdd extends ProductEvent {
   ProductEventAdd({required this.name, required this.qty, required this.code});
 }
 
-class ProductEventEdit extends ProductEvent {}
+class ProductEventEdit extends ProductEvent {
+  final String name;
+  final int qty;
+  final String id;
+
+  ProductEventEdit({required this.name, required this.qty, required this.id});
+}
 
 class ProductEventDelete extends ProductEvent {
   final String id;

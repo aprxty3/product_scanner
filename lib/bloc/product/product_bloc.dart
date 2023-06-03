@@ -32,7 +32,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         await firestore.collection('products').doc(hasil.id).update({
           'id': hasil.id,
         });
-        emit(ProductStateComplete());
+        emit(ProductStateCompleteAdd());
       } on FirebaseException catch (e) {
         emit(ProductStateError(
             message: e.message ?? 'Tidak dapat menambahkan product'));
@@ -40,13 +40,29 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(ProductStateError(message: e.toString()));
       }
     });
-    on<ProductEventEdit>((event, emit) {});
+    on<ProductEventEdit>((event, emit) async {
+      try {
+        emit(ProductStateLoading());
+
+        await firestore.collection('products').doc(event.id).update({
+          'name': event.name,
+          'qty': event.qty,
+        });
+
+        emit(ProductStateCompleteEdit());
+      } on FirebaseException catch (e) {
+        emit(ProductStateError(
+            message: e.message ?? 'Tidak dapat menambahkan product'));
+      } catch (e) {
+        emit(ProductStateError(message: e.toString()));
+      }
+    });
     on<ProductEventDelete>((event, emit) async {
       try {
         emit(ProductStateLoading());
         await firestore.collection('products').doc(event.id).delete();
 
-        emit(ProductStateComplete());
+        emit(ProductStateCompleteDelete());
       } on FirebaseException catch (e) {
         emit(ProductStateError(
             message: e.message ?? 'Tidak dapat menghapus product'));

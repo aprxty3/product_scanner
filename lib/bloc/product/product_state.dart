@@ -13,7 +13,11 @@ class ProductStateError extends ProductState {
   final String message;
 }
 
-class ProductStateComplete extends ProductState {}
+class ProductStateCompleteAdd extends ProductState {}
+
+class ProductStateCompleteEdit extends ProductState {}
+
+class ProductStateCompleteDelete extends ProductState {}
 
 class ProductStateEdit extends ProductState {}
 
