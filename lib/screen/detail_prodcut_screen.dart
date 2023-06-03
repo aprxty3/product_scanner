@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:product_scanner/bloc/bloc.dart';
+import 'package:product_scanner/routes/router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../model/product_model.dart';
@@ -85,11 +86,27 @@ class DetailProductScreen extends StatelessWidget {
                     ProductEventDelete(product.id!),
                   );
             },
-            child: const Text(
-              'Delete Product',
-              style: TextStyle(
-                color: Colors.red,
-              ),
+            child: BlocConsumer<ProductBloc, ProductState>(
+              listener: (context, state) {
+                if (state is ProductStateError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                    ),
+                  );
+                }
+                if (state is ProductStateComplete) {
+                  context.pop();
+                }
+              },
+              builder: (context, state) {
+                return const Text(
+                  'Delete Product',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                );
+              },
             ),
           ),
         ],
