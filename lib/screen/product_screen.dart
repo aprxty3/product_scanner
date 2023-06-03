@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:product_scanner/bloc/bloc.dart';
 import 'package:product_scanner/model/product_model.dart';
 import 'package:product_scanner/routes/router.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});
@@ -43,9 +44,12 @@ class ProductScreen extends StatelessWidget {
               ProductModel productModel = allProducts[index];
               return Card(
                 elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(9),
+                ),
                 margin: const EdgeInsets.all(10),
                 child: Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(15),
                   height: 100,
                   child: Row(
                     children: [
@@ -53,16 +57,28 @@ class ProductScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text(
+                              productModel.code.toString(),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
                             Text(productModel.name.toString()),
-                            Text(productModel.name.toString()),
-                            Text(productModel.name.toString()),
+                            const SizedBox(height: 5),
+                            Text('Jumlah Product : ${productModel.qty}'),
                           ],
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: 50,
-                        color: Colors.amber,
+                        child: QrImageView(
+                          data: productModel.code!,
+                          size: 200,
+                          version: QrVersions.auto,
+                        ),
                       ),
                     ],
                   ),
