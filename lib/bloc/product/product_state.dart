@@ -19,6 +19,8 @@ class ProductStateCompleteEdit extends ProductState {}
 
 class ProductStateCompleteDelete extends ProductState {}
 
+class ProductStateCompleteExport extends ProductState {}
+
 class ProductStateEdit extends ProductState {}
 
 class ProductStateDelete extends ProductState {}

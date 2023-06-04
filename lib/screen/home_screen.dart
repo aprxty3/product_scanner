@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_scanner/bloc/auth/auth_bloc.dart';
+import 'package:product_scanner/bloc/product/product_bloc.dart';
 import 'package:product_scanner/routes/router.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -45,7 +46,9 @@ class HomeScreen extends StatelessWidget {
             case 3:
               title = 'Catalog';
               icon = Icons.document_scanner_outlined;
-              onTap = () {};
+              onTap = () {
+                context.read<ProductBloc>().add(ProductEventExportPdf());
+              };
               break;
           }
 
@@ -59,10 +62,25 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      icon,
-                      size: 50,
-                    ),
+                    (index == 3)
+                        ? BlocConsumer<ProductBloc, ProductState>(
+                            listener: (context, state) {
+                              // TODO: implement listener
+                            },
+                            builder: (context, state) {
+                              if (state is ProductStateLoading) {
+                                return const CircularProgressIndicator();
+                              }
+                              return Icon(
+                                icon,
+                                size: 50,
+                              );
+                            },
+                          )
+                        : Icon(
+                            icon,
+                            size: 50,
+                          ),
                     const SizedBox(height: 10),
                     Text(title!),
                   ],
